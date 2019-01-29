@@ -41,7 +41,7 @@ public class PersonController {
         }
         Person p= personService.getByEmail(person.getEmail());
         if (p!=null) {
-            redirAttrs.addFlashAttribute("error", "Email Address Already!");
+            redirAttrs.addFlashAttribute("error", "Email Address Already Should be Unique!");
         } else {
 //            personService.savePerson(person);
             redirAttrs.addFlashAttribute("flash", "Added Successfully!");

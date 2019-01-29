@@ -27,12 +27,20 @@ public class RestTestApi {
     }
 //        for save info
     @PostMapping(value = "/save",produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Person saveInfo(HttpServletRequest request,@RequestBody Person person){
+    public String saveInfo(HttpServletRequest request,@RequestBody Person person){
         String key= request.getHeader(StringConstants.SEVA_SECRET_KEY);
-        if(key !=null && key.equalsIgnoreCase("dev")) {
-            personService.savePerson(person);
-        }
-        return person;
+            if(key !=null && key.equalsIgnoreCase("dev")) {
+               Person personServiceByEmail=personService.getByEmail(person.getEmail());
+                if (personServiceByEmail!= null) {
+                    return "email address already should be unique";
+                }
+                else {
+                    personService.savePerson(person);
+
+                return person.toString();
+                }
+                }
+                return null;
+            }
     }
 
-}

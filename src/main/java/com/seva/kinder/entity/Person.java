@@ -38,6 +38,17 @@ public class Person {
     @NotNull
     private LocalDate dob;
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "fullName='" + fullName + '\'' +
+                ", address='" + address + '\'' +
+                ", dob=" + dob +
+                ", email='" + email + '\'' +
+                ", mobile=" + mobile +
+                '}';
+    }
+
     public String getEmail() {
         return email;
     }
