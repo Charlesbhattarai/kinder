@@ -8,6 +8,7 @@ public interface PersonService {
     List<Person> getAll();
     Person savePerson(Person person);
     Person getById(long id);
-//  List<Person> getAll(int page);
     Person update(Person person);
+    String delete(long id);
+    Person getByEmail(String email);
 }

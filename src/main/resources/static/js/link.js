@@ -10,6 +10,7 @@ $( document ).ready(function() {
 
 
     function ajaxPost(){
+        alert('adfsadfsadf');
 
         // PREPARE FORM DATA
         var formData = {

@@ -39,11 +39,22 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getById(long id) {
-        return null;
+        return personRepository.getOne(id);
     }
 
     @Override
     public Person update(Person person) {
         return null;
+    }
+
+    @Override
+    public String delete(long id) {
+        personRepository.deleteById(id);
+        return "Deleted Successfully ";
+    }
+
+    @Override
+    public Person getByEmail(String email) {
+        return personRepository.getByEmail(email);
     }
 }

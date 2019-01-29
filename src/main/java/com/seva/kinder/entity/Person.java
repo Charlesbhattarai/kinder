@@ -38,6 +38,17 @@ public class Person {
     @NotNull
     private LocalDate dob;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @NotNull
+    private String email;
+
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "person")
     private Set<MobileDetail> mobile = new HashSet<>();
 
