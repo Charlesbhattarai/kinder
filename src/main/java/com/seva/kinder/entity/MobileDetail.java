@@ -21,7 +21,6 @@ public class MobileDetail implements Serializable{
     private long id;
 
     @NotNull
-    @Lob
     private String mobileNumber;
 
     @ManyToOne(fetch= FetchType.LAZY)

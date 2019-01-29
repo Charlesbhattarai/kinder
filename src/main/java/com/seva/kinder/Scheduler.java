@@ -22,7 +22,7 @@ public class Scheduler {
     @Autowired
     private MailController mailController;
 
-    @Scheduled(cron = "0 28 11 * * *")
+    @Scheduled(cron = "0 57 15 * * *")
     public void birthdayTime() throws MessagingException {
         List<Person> personList = personService.getAll();
 //        personList.forEach(e -> System.out.println(e.getDob()));

@@ -34,7 +34,6 @@ public class PersonController {
     @RequestMapping(method=RequestMethod.POST,value="/save")
     public String savePerson(Model model, @Valid @ModelAttribute Person person,
                              RedirectAttributes redirAttrs, BindingResult result, HttpServletRequest request) {
-        System.out.println(request.getParameter("dob"));
 
          if(result.hasErrors()) {
              System.out.println(result);
@@ -43,8 +42,8 @@ public class PersonController {
         if (p!=null) {
             redirAttrs.addFlashAttribute("error", "Email Address Already Should be Unique!");
         } else {
-//            personService.savePerson(person);
-            redirAttrs.addFlashAttribute("flash", "Added Successfully!");
+            personService.savePerson(person);
+            redirAttrs.addFlashAttribute("flash", " "+person.getFullName().toUpperCase()+" Successfully Added!");
         }
         return "redirect:/";
     }

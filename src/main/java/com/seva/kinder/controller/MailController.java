@@ -26,10 +26,12 @@ public class MailController {
             @Override
             public void run() {
                 try{
-                    String msg="Happy BirthDay Dear. "+name.toUpperCase()+"  !!! Have a Great Day. \n \n Thank You \n Seva Development ";
+
+                    String msg="Dear<b> "+name.toUpperCase()+" </b>,<p> On Behalf of Seva Development we would like to wish you a Many many Happy returns of the day</p> <p style=color:red;><b>Happy Birthday and Have a Great Day.<b/></p>\n \n Thank You! <p> Seva Development </p>";
                     MimeMessage message = mailSender.createMimeMessage();
-                    MimeMessageHelper helper = new MimeMessageHelper(message);
+                    MimeMessageHelper helper = new MimeMessageHelper(message,true);
                     helper.setTo(email);
+                    message.setContent(msg,"text/html");
                     helper.setText(msg);
                     helper.setSubject("BirthDay");
                     mailSender.send(message);
