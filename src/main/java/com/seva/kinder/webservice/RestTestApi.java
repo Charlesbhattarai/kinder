@@ -15,6 +15,9 @@ import java.util.List;
 public class RestTestApi {
     @Autowired
     private PersonService personService;
+    public RestTestApi(PersonService personService){
+        this.personService=personService;
+    }
 //    for get list
     @GetMapping(value = "/userlist",produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Person> getUserInfo(HttpServletRequest request){
