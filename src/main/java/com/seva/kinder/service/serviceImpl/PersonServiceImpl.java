@@ -55,6 +55,6 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getByEmail(String email) {
-        return personRepository.getByEmail(email);
+        return personRepository.findByEmail(email);
     }
 }

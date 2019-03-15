@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface PersonRepository extends JpaRepository<Person,Long> {
 
-    @Query("SELECT p FROM  Person  p WHERE p.email = ?1")
-    Person getByEmail(String email);
+//    @Query("SELECT p FROM  Person  p WHERE p.email = ?1")
+//    Person getByEmail(String email);
+
+    Person findByEmail(String email);
 }

@@ -26,10 +26,29 @@ public class PersonController {
 //    for get user page
     @RequestMapping(method=RequestMethod.GET,value="/")
     public String getMain(Model model) {
+//        List<Person> pLists=personService.getAll();
+//        model.addAttribute("list", pLists);
+//        return "home/person";
+        return "redirect:/signin";
+    }
+
+//    for sign
+@RequestMapping(method=RequestMethod.GET,value="/signin")
+public String getSign(Model model) {
         List<Person> pLists=personService.getAll();
         model.addAttribute("list", pLists);
+        return "home/login";
+}
+
+//success url
+@RequestMapping(method=RequestMethod.GET,value="/signinsuccess")
+public String getSignSuccess(Model model) {
+    List<Person> pLists=personService.getAll();
+        model.addAttribute("list", pLists);
         return "home/person";
-    }
+}
+//end success
+
 //    for save
     @RequestMapping(method=RequestMethod.POST,value="/save")
     public String savePerson(Model model, @Valid @ModelAttribute Person person,

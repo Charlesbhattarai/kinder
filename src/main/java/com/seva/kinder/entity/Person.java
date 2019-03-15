@@ -1,25 +1,22 @@
 package com.seva.kinder.entity;
+import com.seva.kinder.service.PersonService;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.parameters.P;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
 @Entity
 @Table(name="Person")
-public class Person {
+public class Person implements UserDetails {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,12 +28,31 @@ public class Person {
     @NotNull(message="this value could not be null !!!")
     private String fullName;
 
-    @NotNull
     @Size(max=100)
     private String address;
 
-    @NotNull
+
     private LocalDate dob;
+
+    @NotNull
+    private String email;
+
+    @NotNull
+    private String role;
+
+    private String password;
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     @Override
     public String toString() {
@@ -57,13 +73,10 @@ public class Person {
         this.email = email;
     }
 
-    @NotNull
-    private String email;
+
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "person")
     private Set<MobileDetail> mobile = new HashSet<>();
-
-
 
     public Set<MobileDetail> getMobile() {
         return mobile;
@@ -113,5 +126,42 @@ public class Person {
     }
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+         PersonService personService=null;
+        Set<GrantedAuthority> authorites = new HashSet<>();
+        authorites.add(new Authority(getRole()));
+//        personService.getAll().forEach(ur -> authorites.add(new Authority(ur.getRole())));
+        return authorites;
+    }
 
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
